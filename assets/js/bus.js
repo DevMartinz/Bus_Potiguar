@@ -15,7 +15,7 @@ function updateList(){
         table.html("");
         $(res._embedded.onibus).each(function(k,el){
             let onibus = el;
-            tr = $(`<tr><td>${onibus.numOnibus}</td><td>${onibus.rota_id}</td><td>${onibus.acessibilidade}</td></tr>`);
+            tr = $(`<tr><td>${onibus.numOnibus}</td><td>${onibus.horaSaida}</td><td>${onibus.horaChegada}</td><td>${onibus.valorLinha}</td><td>${onibus.acessibilidade}</td></tr>`);
             console.log(tableContent);
             table.append(tr);
         })
@@ -27,6 +27,7 @@ function updateList(){
         table.append(tr);
     });
 }
+
 
 
   

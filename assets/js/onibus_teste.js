@@ -62,3 +62,20 @@ function save(){
         console.log(res);
     });
 }
+
+document.addEventListener('DOMContentLoaded', function() {
+    const btnFavoritar = document.getElementById('btn-favoritar');
+  
+    btnFavoritar.addEventListener('click', function() {
+      const linhaSelecionada = document.getElementById('sel-linha').value;
+      const diaSelecionado = document.getElementById('sel-dia').value;
+      const informacaoFavoritada = `Linha: ${linhaSelecionada}, Dia: ${diaSelecionado}`;
+  
+      // Salvar a informação no localStorage
+      localStorage.setItem('informacaoFavoritada', informacaoFavoritada);
+  
+      // Redirecionar para a outra página
+      window.location.href = 'index.html';
+    });
+  });
+  

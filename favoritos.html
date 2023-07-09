@@ -26,6 +26,7 @@
 
   <!-- Main CSS File -->
   <link href="assets/css/style.css" rel="stylesheet">
+  <link href="assets/css/form.css" rel="stylesheet">
 
   <!-- Jquery Scripts -->
   <script src="assets/js/jquery-3.6.4.min.js"></script>
@@ -68,42 +69,22 @@
     </header><!-- End Header -->
 
 
-    <main id="main">
-        <!-- ======= Onibus Table ======= -->
-        <section id="bus" class="bus">
-          <div class="container">
-    
+    <main id="main" >
+      
+      <section id="fav" class="favoritos">
+        <div class="container">
             <div class="section-title">
-              <h2>Onibus</h2>
+              <h2 class="mb-3">Create Account</h2>
             </div>
-            <div class="row">
-              <div class="col-lg-4" data-aos="fade-right">
-                <img src="assets/img/test2.jpg" class="img-fluid" alt="" id="img_horario">
-              </div>
-              <div class="col-lg-8 pt-4 pt-lg-0 content" data-aos="fade-left">
-                <p class="fst-italic">
-                  Pesquise seu Onibus.
-                </p>
-                <table class="table" >
-                  <thead class="thead-dark">
-                    <tr>
-                        <th scope="col">Número</th>
-                        <th scope="col">Hora da Saida</th>
-                        <th scope="col">Hora da Chegada</th>
-                        <th scope="col">Valor da Rota</th>
-                        <th scope="col">Acessibilidade</th>
-                    </tr>
-                  </thead>
-                    <tbody id="tableContent">
-                    </tbody>
-                </table>
-              </div>
+            
+            <div id="sel-linha">
+              <p id="sel-dia"></p>
             </div>
-          </section><!-- End Horarios Section -->
-      </main>
-
-
-
+           
+            </details>
+        </div>
+      </section>
+    </main>
 
      <!-- ======= Footer ======= -->
   <footer id="footer">
@@ -127,5 +108,6 @@
 
   <!-- Template Main JS File -->
   <script src="assets/js/main.js"></script>
-  <script src="assets/js/bus.js"></script>
+  <script src="assets/js/favorito.js"></script>
+  <script src="assets/js/onibus_teste.js"></script>
 </body>
