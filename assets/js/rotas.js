@@ -41,13 +41,15 @@ function selectList(){
     }).done(function(res) {
         console.log(res._embedded.rota);
         let select = $('#rotas-sel');
+        console.log(res);
         select.html("");
         $(res._embedded.rota).each(function(index, el){
             let rota = el;
+            console.log(rota);
+            console.log(index);
             let option =  $('<option></option>').attr('value', index).text(rota.nomeRota);
             select.append(option);
         })
-       
     })
     .fail(function(res) {
         let select = $('#rotas-sel');

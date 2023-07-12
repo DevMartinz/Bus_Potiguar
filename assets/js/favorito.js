@@ -10,6 +10,3 @@ document.addEventListener('DOMContentLoaded', function() {
     mensagem.textContent = 'Nenhuma informação favoritada encontrada.';
   }
 });
-
-  
-  

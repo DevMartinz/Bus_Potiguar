@@ -2,18 +2,18 @@ var URL_BASE = "http://localhost:8080/"
 
 function updateList(){
 
-    $.ajax(URL_BASE+"rota",{
+    $.ajax(URL_BASE+"rota/",{
         method:'get',
     }).done(function(res) {
 
-        console.log(res._embedded.rota);
+        console.log(res);
 
         let select = $('#sel-linha');
         select.html("");
 
-        $(res._embedded.rota).each(function(index,el){
+        $(res).each(function(index,el){
             let rota = el;
-            let option =  $('<option></option>').attr('value', index).text(rota.nomeRota);
+            let option =  $('<option></option>').attr('value', rota.id).text(rota.nomeRota);
             select.append(option);
         })
        
@@ -62,20 +62,3 @@ function save(){
         console.log(res);
     });
 }
-
-document.addEventListener('DOMContentLoaded', function() {
-    const btnFavoritar = document.getElementById('btn-favoritar');
-  
-    btnFavoritar.addEventListener('click', function() {
-      const linhaSelecionada = document.getElementById('sel-linha').value;
-      const diaSelecionado = document.getElementById('sel-dia').value;
-      const informacaoFavoritada = `Linha: ${linhaSelecionada}, Dia: ${diaSelecionado}`;
-  
-      // Salvar a informação no localStorage
-      localStorage.setItem('informacaoFavoritada', informacaoFavoritada);
-  
-      // Redirecionar para a outra página
-      window.location.href = 'index.html';
-    });
-  });
-  
