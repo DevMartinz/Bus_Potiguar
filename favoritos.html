@@ -26,7 +26,7 @@
 
   <!-- Main CSS File -->
   <link href="assets/css/style.css" rel="stylesheet">
-  <link href="assets/css/form.css" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/styleLogin.css">
 
   <!-- Jquery Scripts -->
   <script src="assets/js/jquery-3.6.4.min.js"></script>
@@ -47,14 +47,15 @@
           <img src="assets/img/profile-img.png" alt="" class="img-fluid rounded-circle">
           <h1 class="text-light"><a href="index.html">BusPotiguar</a></h1>
         </div>
-  
+       
+      </div>
   <hr/>
   
         <nav id="navbar" class="nav-menu navbar">
           <ul>
             <li><a href="index.html" class="nav-link scrollto active"><i class="bx bx-home"></i> <span>Home</span></a></li>
             <li><a href="onibus.html" class="nav-link scrollto"><i class="bx bx-bus"></i> <span>Onibus</span></a></li>
-            <li><a href="favoritos.html" class="nav-link scrollto"><i class="bx bx-user"></i> <span>Meus Favoritos</span></a></li>
+            <li><a href="favoritos.html" class="nav-link scrollto"><i class="bx bx-user"></i> <span>Favoritos</span></a></li>
             <li><a href="#horarios" class="nav-link scrollto"><i class="bx bx-time"></i> <span>Horários e Itinerários</span></a></li>
             <li><a href="#favoritos" class="nav-link scrollto"><i class="bx bx-file-blank"></i> <span>Favoritos</span></a></li>
             <li><a href="#suporte" class="nav-link scrollto"><i class="bx bx-envelope"></i> <span>Suporte</span></a></li>
@@ -63,21 +64,36 @@
       </div>
     </header><!-- End Header -->
 
-
     <main id="main" >
-      
       <section id="fav" class="favoritos">
         <div class="container">
             <div class="section-title">
-              <h2 class="mb-3">Create Account</h2>
+              <h2 class="mb-3">Favoritos</h2>
             </div>
-             <div id="sel-linha">
-              <p id="sel-dia"></p>
+            <div class="mt-3 col-lg-3">
+              <!-- configuracoes do google -->
+              <div id="g_id_onload"
+                  data-client_id="712947971058-ct6rvdhj5o1u979qp64dgh96rlc0iml1.apps.googleusercontent.com"
+                  data-context="signin"
+                  data-ux_mode="popup"
+                  data-callback="loginCallback"
+                  data-auto_prompt="false">
+              </div>
+              <!-- botao de login -->
+              <div class="g_id_signin"
+                  data-type="standard"
+                  data-shape="rectangular"
+                  data-theme="outline"
+                  data-text="signin_with"
+                  data-size="large"
+                  data-logo_alignment="left">
+              </div>
+              <!-- local onde ira aparecer as informacoes do usuario -->
+              <div class="g_id_logado"></div>
             </div>
         </div>
       </section>
     </main>
-	
 	<hr/>
 
      <!-- ======= Footer ======= -->
@@ -102,6 +118,6 @@
 
   <!-- Template Main JS File -->
   <script src="assets/js/main.js"></script>
-  <script src="assets/js/favorito.js"></script>
-  
+  <script src="https://accounts.google.com/gsi/client" async></script>
+  <script src="assets/js/goauth.js"></script>
 </body>
