@@ -1,6 +1,1 @@
-Thanks for downloading this template!
-
-Template Name: iPortfolio
-Template URL: https://bootstrapmade.com/iportfolio-bootstrap-portfolio-websites-template/
-Author: BootstrapMade.com
-License: https://bootstrapmade.com/license/
+O “Bus Potiguar” - Monitoramento de Ônibus intermunicipais têm o propósito de monitorar e informar aos usuários, a localização, itinerário e horário dos ônibus de transporte intermunicipal da cidade de Nova Cruz, através do acesso ao site do sistema. Também será possível ao usuário adicionar uma rota de ônibus aos favoritos ao selecionar a linha de ônibus desejada. 

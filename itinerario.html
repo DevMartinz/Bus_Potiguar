@@ -26,7 +26,6 @@
 
   <!-- Main CSS File -->
   <link href="assets/css/style.css" rel="stylesheet">
-  <link rel="stylesheet" href="assets/css/Login.css">
 
   <!-- Jquery Scripts -->
   <script src="assets/js/jquery-3.6.4.min.js"></script>
@@ -57,45 +56,56 @@
         <nav id="navbar" class="nav-menu navbar">
           <ul>
             <li><a href="index.html" class="nav-link scrollto"><i class="bx bx-home"></i> <span>Home</span></a></li>
-            <li><a href="itinerario.html" class="nav-link scrollto"><i class="bx bx-time"></i> <span>Horários e Itinerários</span></a></li>
-            <li><a href="#" class="nav-link scrollto active"><i class="bx bx-user"></i> <span>Meus Favoritos</span></a></li>
+            <li><a href="#" class="nav-link scrollto active"><i class="bx bx-time"></i> <span>Horários e Itinerários</span></a></li>
+            <li><a href="favoritos.html" class="nav-link scrollto"><i class="bx bx-user"></i> <span>Meus Favoritos</span></a></li>
             <li><a href="suporte.html" class="nav-link scrollto"><i class="bx bx-envelope"></i> <span>Suporte</span></a></li>
           </ul>
         </nav><!-- .nav-menu -->
       </div>
     </header><!-- End Header -->
 
-    <main id="main" >
-      <section id="fav" class="favoritos">
-        <div class="container">
-            <div class="section-title">
-              <h2 class="mb-3">Favoritos</h2>
-            </div>
-            <div class="mt-3 col-lg-3">
-              <!-- configuracoes do google -->
-              <div id="g_id_onload"
-                  data-client_id="712947971058-ct6rvdhj5o1u979qp64dgh96rlc0iml1.apps.googleusercontent.com"
-                  data-context="signin"
-                  data-ux_mode="popup"
-                  data-callback="loginCallback"
-                  data-auto_prompt="false">
-              </div>
-              <!-- botao de login -->
-              <div class="g_id_signin"
-                  data-type="standard"
-                  data-shape="rectangular"
-                  data-theme="outline"
-                  data-text="signin_with"
-                  data-size="large"
-                  data-logo_alignment="left">
-              </div>
-              <!-- local onde ira aparecer as informacoes do usuario -->
-              <div class="g_id_logado"></div>
-            </div>
+
+    <main id="main">
+ <!-- ======= Horarios Section ======= -->
+ <section id="horarios" class="horarios">
+  <div class="container">
+
+    <div class="section-title" style="  margin-bottom: 0px;
+    padding-bottom: 0px;">
+      <h2>Horários e Itinerários</h2>
+    </div>
+
+    <div class="row">
+      <p class="fst-italic" data-aos="fade-right" >
+        Selecione a Linha e o Dia desejado, para exibir mais informações sobre a rota.
+      </p>
+      <div class="col-lg-5" data-aos="fade-right">
+        <img src="assets/img/test2.jpg" class="img-fluid" alt="" id="img_horario">
+      </div>
+      <div class="col-lg-8 pt-0 pt-lg-0 content" data-aos="fade-left">
+        <div class="row">
+          <label for="linhas" style=" margin-top: 1.8%;">Escolha uma Linha:</label>
+          <select id="sel-linha">
+           </select>
         </div>
-      </section>
-    </main>
-	<hr/>
+        <div class="row">
+           <label for="linhas">Escolha o dia:</label>
+           <select name="dia" id="sel-dia">
+            <option value="1">Segunda - Sexta</option>
+            <option value="10">Feriado ou Final de Semana</option>
+           </select>
+        </div>
+        <a href="rotas.html" id="btn-buscar" class="btn btn-success">Buscar</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section><!-- End Horarios Section -->
+      </main>
+
+
+
 
      <!-- ======= Footer ======= -->
   <footer id="footer">
@@ -119,6 +129,5 @@
 
   <!-- Template Main JS File -->
   <script src="assets/js/main.js"></script>
-  <script src="https://accounts.google.com/gsi/client" async></script>
-  <script src="assets/js/goauth.js"></script>
+  <script src="assets/js/bus.js"></script>
 </body>

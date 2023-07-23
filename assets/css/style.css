@@ -343,6 +343,7 @@ section {
   font-weight: 700;
   font-size: 26px;
   color: #173b6c;
+  margin: 10px 0 5px 0;
 }
 
 .horarios .content ul {
@@ -377,6 +378,7 @@ section {
   border-radius: 7px;
   background: #fff;
   box-shadow: 0 0 24px 0 rgba(0, 0, 0, 0.12);
+  margin-left: 1.8%;
 }
 
 .horarios #sel-dia {
@@ -385,10 +387,15 @@ section {
   border-radius: 7px;
   background: #fff;
   box-shadow: 0 0 24px 0 rgba(0, 0, 0, 0.12);
+  margin-left: 1.8%;
 }
 
 .horarios #img_horario{
   border-radius: 5px;
+}
+
+#btn-buscar {
+  margin-top: 2%;
 }
 
 /*--------------------------------------------------------------
