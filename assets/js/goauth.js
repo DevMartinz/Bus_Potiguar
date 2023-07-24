@@ -20,21 +20,20 @@ function loginCallback(resp){
     setLoginStatus(cred);
 }
 
-function logout(){
-    localStorage.setItem("gauth-token", undefined);
-    document.querySelector(".g_id_logado").innerHTML = "";
-    document.querySelector(".g_id_signin").style.display = 'block';
-}
-
 function setLoginStatus(cred){
+  // Esconde a tela de pré-login
+  document.getElementById("tela-pre-login").style.display = "none";
+
+  // Exibe a tela de pós-login
+  document.getElementById("g_id_logado").style.display = "block";
     console.log(cred);
     //esconde o botao de login do google
     document.querySelector(".g_id_signin").style.display = 'none';
     //mostra o usuario logado
-    html = `<div class='g_login'>
+    html = `<div class='g_login' id="logoutDiv">
                 <img class='g_pic' src="${cred.picture}">
                 <span><div class='g_name'>${cred.given_name} ${cred.family_name}</div><div class='g_email'>${cred.email}</div></span>
-                <a href='#' onclick='logout()'>Logout</a>
+                <a href='#'  onclick="logout()"'>Logout</a>
             </div>`
     document.querySelector(".g_id_logado").innerHTML = html;
 }
@@ -48,3 +47,21 @@ window.addEventListener("load",() => {
         setLoginStatus(cred);
     }
 });
+
+function logout() {
+    // Limpa o token do localStorage
+    localStorage.removeItem("gauth-token");
+  
+    // Esconde a tela de pós-login
+    document.getElementById("g_id_logado").style.display = "none";
+  
+    // Oculta a div de logout usando o ID
+    document.getElementById("logoutDiv").style.display = "none";
+  
+    // Exibe a tela de pré-login novamente
+    document.getElementById("tela-pre-login").style.display = "block";
+  
+    // Exibe o botão de login do Google novamente
+    document.querySelector(".g_id_signin").style.display = "block";
+  }
+

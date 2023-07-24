@@ -827,3 +827,7 @@ section {
     padding-right: 20px 15px;
   }
 }
+
+#g_id_logado {
+  display: none;
+}
