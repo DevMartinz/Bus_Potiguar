@@ -39,11 +39,10 @@ $(function(){
 
     $('#btn-buscar').click(function(e) {
         e.preventDefault(); // Impede o comportamento padrão do link
-    
-        var rotaSelecionada = $('#sel-linha').val();
-        var select = $(this).val();
-        var rotaSelecionada = parseInt(select) + 1;
-        var url = 'rotas.html?opc=' + rotaSelecionada;
+
+        var select = $('#sel-linha').val();
+        var test = $('#sel-dia').val();
+        var url = 'rotas.html?opc=' + select + '&test=' + test;
         window.location.href = url;
       });
 });

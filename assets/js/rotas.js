@@ -1,17 +1,50 @@
-var URL_BASE = "http://localhost:8080/";
+var URL_BASE = "http://20.15.106.172:8080/"
+
+// Função para obter o valor do parâmetro "opc" da URL
+function getParamFromURL() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const opcValuetest = urlParams.get('opc');
+    const opcValue = parseInt(opcValuetest);
+    return opcValue;
+}
+
+// Função para obter o valor do parâmetro "test" da URL
+function getTestFromURL() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const opcValuetest = urlParams.get('test');
+    const testValue = parseInt(opcValuetest);
+    return testValue;
+}
 
 $(function(){
     //Sempre que carregar a página atualiza a lista
-    selectList();
-    $('#rotas-sel').change(function() {
-        var select = $(this).val();
-        console.log(select);
-        var rotaSelecionada = parseInt(select) + 1;
-        console.log(rotaSelecionada);
-        updateList(rotaSelecionada);
-        horarioList(select);
+    //selectList();
+    const opcValue = getParamFromURL();
+    const testValue = getTestFromURL();
+    const stropcValue = opcValue.toString();
+    const strtestValue = testValue.toString();
+
+    updateList(opcValue);
+    horarioList(stropcValue, strtestValue);
+
+    $.ajax(URL_BASE + "rota/" + opcValue, {
+        method: 'get',
+    }).done(function(res) {
+        let h2 = $('#titulo_rotas');
+        h2.text("Rota " + res.nomeRota); // Atualiza o texto do <h2> com o nome da Rota
+    }).fail(function(res) {
+        let h2 = $('#titulo_rotas');
+        h2.text('Nome da Rota não encontrado'); // Caso não seja possível obter o nome da Rota
     });
-});
+//     $('#rotas-sel').change(function() {
+//         var select = $(this).val();
+//         console.log(select);
+//         var rotaSelecionada = parseInt(select) + 1;
+//         console.log(rotaSelecionada);
+//         updateList(rotaSelecionada);
+//         horarioList(select);
+//     });
+ });
 
 function updateList(rotaSelecionada){ 
     $.ajax(URL_BASE+"rota/" + rotaSelecionada + "/paradas", {
@@ -59,18 +92,31 @@ function selectList(){
     });
 }
 
-function horarioList(select){
-    $.ajax(URL_BASE+"rota", {
+function horarioList(select, test){
+    $.ajax(URL_BASE+"rota/"+select+"/onibus", {
         method:'get',
     }).done(function(res) {
         
+        // http://20.96.161.7/rota/1/onibus
+
         let table = $('#horario_table');
         table.html("");
-        let rota = res._embedded.rota[select];
-        console.log(rota);
-        tr = $(`<tr><td>${rota.horaSaida}</td><td>${rota.horaChegada}</td></tr>`);
-        console.log(tableContent);
-        table.append(tr);
+
+        // Percorre todos os ônibus retornados na resposta
+        res._embedded.onibus.forEach(function(onibus) {
+            if (onibus.week.toString() === test) {
+                let tr = $(`<tr><td>${onibus.numOnibus}</td><td>${onibus.horaSaida}</td><td>${onibus.horaChegada}</td><td>${onibus.acessibilidade}</td><td>${onibus.valorLinha}</td></tr>`);
+                table.append(tr);
+            }
+        });
+
+
+
+        // let onibus = res._embedded.onibus[select];
+        // // console.log(rota);
+        // tr = $(`<tr><td>${onibus.numOnibus}</td><td>${onibus.horaSaida}</td><td>${onibus.horaChegada}</td><td>${onibus.acessibilidade}</td><td>${onibus.valorLinha}</td></tr>`);
+        // // console.log(tableContent);
+        // table.append(tr);
     })
     .fail(function(res) {
         let table = $('#horario_table');
@@ -79,3 +125,4 @@ function horarioList(select){
         table.append(tr);
     });
 }
+

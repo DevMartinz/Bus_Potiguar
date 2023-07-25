@@ -56,7 +56,7 @@
       <nav id="navbar" class="nav-menu navbar">
         <ul>
           <li><a href="index.html" class="nav-link scrollto"><i class="bx bx-home"></i> <span>Home</span></a></li>
-          <li><a href="#" class="nav-link scrollto active"><i class="bx bx-time"></i> <span>Horários e Itinerários</span></a></li>
+          <li><a href="itinerario.html" class="nav-link scrollto active"><i class="bx bx-time"></i> <span>Horários e Itinerários</span></a></li>
           <li><a href="favoritos.html" class="nav-link scrollto"><i class="bx bx-user"></i> <span>Meus Favoritos</span></a></li>
           <li><a href="suporte.html" class="nav-link scrollto"><i class="bx bx-envelope"></i> <span>Suporte</span></a></li>
         </ul>
@@ -71,17 +71,19 @@
           <div class="container">
     
             <div class="section-title">
-              <h2>Rotas</h2>
+              <h2 id="titulo_rotas"></h2>
+              <a href="favoritos.html" id="btn-buscar" class="btn btn-warning">Favoritar</a>
             </div>
               <div class="col-lg-8 pt-4 pt-lg-0 content" data-aos="fade-left">
-                <select name="" id="rotas-sel">
-                </select>
                 <hr />
                 <table class="table" >
                   <thead class="thead-dark">
                       <tr>
+                        <th scope="col">Ônibus</th>
                         <th scope="col">Horário de Saída</th>
                         <th scope="col">Horário de Chegada</th>
+                        <th scope="col">Acessibilidade</th>
+                        <th scope="col">Valor</th>
                       </tr>
                     </thead>
                     <tbody id="horario_table">
