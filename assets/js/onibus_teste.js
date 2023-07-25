@@ -1,4 +1,4 @@
-var URL_BASE = "http://localhost:8080/"
+var URL_BASE = "http://20.15.106.172:8080/"
 
 function updateList(){
 
@@ -32,7 +32,7 @@ $(function(){
     //Sempre que carregar a página atualiza a lista
     updateList();
 
-    $('#rotas-sel').change(function() {
+    $('#sel-linha').change(function() {
         var select = $(this).val();
         var rotaSelecionada = parseInt(select) + 1;
     });
