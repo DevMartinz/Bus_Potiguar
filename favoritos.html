@@ -71,6 +71,11 @@
             <div class="section-title">
               <h2 class="mb-3">Favoritos</h2>
             </div>
+              <!-- Tela de pré-login -->
+              <div id="tela-pre-login">
+              <!-- Conteúdo da tela de pré-login -->
+              <p>Seja bem-vindo(a)! Caso tenha adicionado alguma rota aos favoritos, faça login para continuar.</p>
+              </div>
             <div class="mt-3 col-lg-3">
               <!-- configuracoes do google -->
               <div id="g_id_onload"
@@ -92,39 +97,46 @@
               <!-- local onde ira aparecer as informacoes do usuario -->
               <div class="g_id_logado"></div>
             </div>
-            <!-- Tela de pré-login -->
-            <div id="tela-pre-login">
-              <!-- Conteúdo da tela de pré-login -->
-              <p>Seja bem-vindo(a)! Faça login para continuar.</p>
-            </div>
             <!-- Tela de pós-login -->
             <div id="g_id_logado">
-              <div class="col-lg-8 pt-4 pt-lg-0 content" data-aos="fade-left">
-                <select name="" id="rotas-sel">
-                </select>
-                <hr />
-                <table class="table" >
-                  <thead class="thead-dark">
-                      <tr>
-                        <th scope="col">Horário de Saída</th>
-                        <th scope="col">Horário de Chegada</th>
-                      </tr>
-                    </thead>
-                    <tbody id="horario_table">
-                    </tbody>
-                  </table>
-
-                  <hr />
-                  <table class="table" >
-                    <thead class="thead-dark">
-                        <tr>
-                          <th scope="col">Lista de Paradas</th>
-                        </tr>
-                      </thead>
-                      <tbody id="tableContent">
-                      </tbody>
-                    </table>
+              <section id="bus" class="bus">
+                <div class="container">
+          
+                  <div class="section-title">
+                    <h2 id="titulo_rotas"></h2>
+                  </div>
+                    <div class="col-lg-8 pt-4 pt-lg-0 content" data-aos="fade-left">
+                      <hr />
+                      <table class="table" >
+                        <thead class="thead-dark">
+                            <tr>
+                              <th scope="col">Ônibus</th>
+                              <th scope="col">Horário de Saída</th>
+                              <th scope="col">Horário de Chegada</th>
+                              <th scope="col">Acessibilidade</th>
+                              <th scope="col">Valor</th>
+                            </tr>
+                          </thead>
+                          <tbody id="horario_table">
+                          </tbody>
+                        </table>
+      
+                        <hr />
+                        <table class="table" >
+                          <thead class="thead-dark">
+                              <tr>
+                                <th scope="col">Lista de Paradas</th>
+                              </tr>
+                            </thead>
+                            <tbody id="tableContent">
+                            </tbody>
+                          </table>
+                      </div>
+                    </div>
+                  </div>
+          
                 </div>
+              </section><!-- End Horarios Section -->
             </div>
         </div>
       </section>
