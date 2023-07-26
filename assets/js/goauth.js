@@ -1,3 +1,5 @@
+var URL_BASE = "http://20.15.106.172:8080/"
+
 //decodifica o jwt
 function jwtDecode (token) {
     var base64Url = token.split('.')[1];
@@ -18,7 +20,17 @@ function loginCallback(resp){
     //cuidado, esse token é mutavel, não pode ser usado como chave no banco
     localStorage.setItem("gauth-token", resp.credential);
     setLoginStatus(cred);
-}
+     
+    // Envia a ID do usuário para o backend
+        $.ajax(URL_BASE + "usuario", {
+            method: 'post',
+            data: { email: cred.sub } // cred.sub é o campo que contém a ID do usuário no objeto cred
+        }).done(function(res) {
+            console.log('ID do usuário salva no banco de dados:', res);
+        }).fail(function(res) {
+            console.error('Erro ao salvar a ID do usuário no banco de dados:', res);
+        });
+    }
 
 function setLoginStatus(cred){
   // Esconde a tela de pré-login

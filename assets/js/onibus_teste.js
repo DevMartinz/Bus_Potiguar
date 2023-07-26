@@ -11,11 +11,16 @@ function updateList(){
         let select = $('#sel-linha');
         select.html("");
 
-        $(res).each(function(index,el){
-            let rota = el;
+        res.forEach(function(rota) {
             let option =  $('<option></option>').attr('value', rota.id).text(rota.nomeRota);
             select.append(option);
-        })
+        });
+
+        // $(res).each(function(index,el){
+        //     let rota = el;
+        //     let option =  $('<option></option>').attr('value', rota.id).text(rota.nomeRota);
+        //     select.append(option);
+        // })
        
     })
     .fail(function(res) {
