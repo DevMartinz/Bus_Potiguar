@@ -22,9 +22,12 @@ function loginCallback(resp){
     setLoginStatus(cred);
      
     // Envia a ID do usuário para o backend
-        $.ajax(URL_BASE + "usuario", {
-            method: 'post',
-            data: { email: cred.sub } // cred.sub é o campo que contém a ID do usuário no objeto cred
+    $.ajax(URL_BASE + "rota", {
+        method: 'post',
+        data: JSON.stringify({ nomeRota: 'teste' }), // Enviando os dados como JSON
+        contentType: "application/json", // Definindo o tipo de conteúdo como JSON
+            
+            // cred.sub é o campo que contém a ID do usuário no objeto cred
         }).done(function(res) {
             console.log('ID do usuário salva no banco de dados:', res);
         }).fail(function(res) {
