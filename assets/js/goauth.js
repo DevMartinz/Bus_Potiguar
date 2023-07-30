@@ -20,11 +20,17 @@ function loginCallback(resp){
     //cuidado, esse token é mutavel, não pode ser usado como chave no banco
     localStorage.setItem("gauth-token", resp.credential);
     setLoginStatus(cred);
+    id_int = parseInt(cred.sub);
+    console.log("testeeeeeeeeee");
+    console.log(cred.email);
+    console.log(cred.name);
      
     // Envia a ID do usuário para o backend
-    $.ajax(URL_BASE + "rota", {
+    $.ajax(URL_BASE + "usuario", {
         method: 'post',
-        data: JSON.stringify({ nomeRota: 'teste' }), // Enviando os dados como JSON
+        data: JSON.stringify({ id: 8, 
+            email: cred.email, 
+            nomeUser: cred.name}), // Enviando os dados como JSON
         contentType: "application/json", // Definindo o tipo de conteúdo como JSON
             
             // cred.sub é o campo que contém a ID do usuário no objeto cred
