@@ -1,4 +1,4 @@
-var URL_BASE = "http://20.15.106.172:8080/"
+var URL_BASE = "http://20.96.161.7/"
 var URL_EDIT = null;
 
 $(function(){
@@ -30,7 +30,7 @@ function save(){
         }).done(function(res) {
             // console.log(res);
     
-            URL_EDIT = "http://20.15.106.172:8080/" + res.id;
+            URL_EDIT = "http://20.96.161.7/" + res.id;
             //atualiza a lista após salvar
             updateList();
         })
