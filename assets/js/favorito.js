@@ -50,13 +50,13 @@ function updateList(rotaSelecionada){
     $.ajax(URL_BASE+"rota/" + rotaSelecionada + "/paradas", {
         method:'get',
     }).done(function(res) {
-        console.log(res._embedded.paradaNome);
+        // console.log(res._embedded.paradaNome);
         let table = $('#tableContent');
         table.html("");
         $(res._embedded.parada).each(function(k,el){
             let parada = el;
             tr = $(`<tr><td>${parada.paradaNome}</td></tr>`);
-            console.log(tableContent);
+            // console.log(tableContent);
             table.append(tr);
         })
     })
@@ -72,14 +72,14 @@ function selectList(){
     $.ajax(URL_BASE+"rota",{
         method:'get',
     }).done(function(res) {
-        console.log(res._embedded.rota);
+        // console.log(res._embedded.rota);
         let select = $('#rotas-sel');
         console.log(res);
         select.html("");
         $(res._embedded.rota).each(function(index, el){
             let rota = el;
-            console.log(rota);
-            console.log(index);
+            // console.log(rota);
+            // console.log(index);
             let option =  $('<option></option>').attr('value', index).text(rota.nomeRota);
             select.append(option);
         })

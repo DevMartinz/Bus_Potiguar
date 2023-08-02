@@ -98,6 +98,8 @@
               <div class="g_id_logado"></div>
             </div>
             <!-- Tela de pós-login -->
+            <div id="botao"></div>
+            <div id="informacao"></div>
             <div id="g_id_logado">
               <section id="bus" class="bus">
                 <div class="container">
@@ -106,6 +108,10 @@
                     <h2 id="titulo_rotas"></h2>
                   </div>
                     <div class="col-lg-8 pt-4 pt-lg-0 content" data-aos="fade-left">
+                      <label for="ro" style=" margin-top: 1.8%;">Escolha uma Linha:</label>
+                      <select id="ro" name="rota_id">
+                      </select>
+
                       <hr />
                       <table class="table" >
                         <thead class="thead-dark">
@@ -167,4 +173,5 @@
   <script src="assets/js/main.js"></script>
   <script src="https://accounts.google.com/gsi/client" async></script>
   <script src="assets/js/goauth.js"></script>
+  
 </body>

@@ -6,7 +6,7 @@ function updateList(){
         method:'get',
     }).done(function(res) {
 
-        console.log(res);
+        // console.log(res);
 
         let select = $('#sel-linha');
         select.html("");
@@ -58,11 +58,11 @@ function save(){
     $.ajax(URL_BASE+"rota",{
 
     }).done(function(res) {
-        console.log(res);
+        // console.log(res);
         //atualiza a lista após salvar
         updateList();
     })
     .fail(function(res) {
-        console.log(res);
+        // console.log(res);
     });
 }
