@@ -1,4 +1,4 @@
-var URL_BASE = "http://20.96.161.7/"
+var URL_BASE = "http://localhost:8080/";
 var URL_EDIT = null;
 
 $(function(){

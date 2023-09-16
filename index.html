@@ -1,106 +1,259 @@
 <!DOCTYPE html>
 <html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta content="width=device-width, initial-scale=1.0" name="viewport" />
 
-<head>
-  <meta charset="utf-8">
-  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+		<title>BusPotiguar</title>
+		<meta content="" name="description" />
+		<meta content="" name="keywords" />
 
-  <title>BusPotiguar</title>
-  <meta content="" name="description">
-  <meta content="" name="keywords">
+		<!-- Favicons -->
+		<link href="assets/img/favicon-32x32.png" rel="icon" />
+		<link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon" />
 
-  <!-- Favicons -->
-  <link href="assets/img/favicon-32x32.png" rel="icon">
-  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+		<!-- Google Fonts -->
+		<link
+			href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+			rel="stylesheet"
+		/>
 
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+		<!-- Vendor CSS Files -->
+		<link href="assets/vendor/aos/aos.css" rel="stylesheet" />
+		<link
+			href="assets/vendor/bootstrap/css/bootstrap.min.css"
+			rel="stylesheet"
+		/>
+		<link
+			href="assets/vendor/bootstrap-icons/bootstrap-icons.css"
+			rel="stylesheet"
+		/>
+		<link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet" />
+		<link
+			href="assets/vendor/glightbox/css/glightbox.min.css"
+			rel="stylesheet"
+		/>
+		<link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet" />
 
-  <!-- Vendor CSS Files -->
-  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
-  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-  <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
-  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
-  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+		<!-- Main CSS File -->
+		<link href="assets/css/style.css" rel="stylesheet" />
 
-  <!-- Main CSS File -->
-  <link href="assets/css/style.css" rel="stylesheet">
+		<!-- Jquery Scripts -->
+		<script src="assets/js/jquery-3.6.4.min.js"></script>
+		<script src="assets/js/jquery.serializejson.js"></script>
+	</head>
 
-  <!-- Jquery Scripts -->
-  <script src="assets/js/jquery-3.6.4.min.js"></script>
-  <script src="assets/js/jquery.serializejson.js"></script>
+	<body>
+		<!-- ======= Mobile nav toggle button ======= -->
+		<i class="bi bi-list mobile-nav-toggle d-xl-none"></i>
 
-</head>
+		<!-- ======= Header ======= -->
+		<header id="header">
+			<div class="d-flex flex-column">
+				<div class="profile">
+					<img
+						src="assets/img/profile-img.png"
+						alt=""
+						class="img-fluid rounded-circle"
+					/>
+					<h1 class="text-light"><a href="index.html">BusPotiguar</a></h1>
+					<div class="social-links mt-3 text-center">
+						<a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
+						<a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
+						<a href="#" class="instagram"><i class="bx bxl-instagram"></i></a>
+						<a href="#" class="linkedin"><i class="bx bxl-linkedin"></i></a>
+					</div>
+				</div>
 
-<body>
+				<nav id="navbar" class="nav-menu navbar">
+					<ul>
+						<li>
+							<a href="#" class="nav-link scrollto active"
+								><i class="bx bx-home"></i> <span>Home</span></a
+							>
+						</li>
+						<li>
+							<a href="itinerario.html" class="nav-link scrollto"
+								><i class="bx bx-time"></i>
+								<span>Horários e Itinerários</span></a
+							>
+						</li>
+						<li>
+							<a href="favoritos.html" class="nav-link scrollto"
+								><i class="bx bx-user"></i> <span>Meus Favoritos</span></a
+							>
+						</li>
+						<li>
+							<a href="suporte.html" class="nav-link scrollto"
+								><i class="bx bx-envelope"></i> <span>Suporte</span></a
+							>
+						</li>
+					</ul>
+				</nav>
+				<!-- .nav-menu -->
+			</div>
+		</header>
+		<!-- End Header -->
 
-  <!-- ======= Mobile nav toggle button ======= -->
-  <i class="bi bi-list mobile-nav-toggle d-xl-none"></i>
+		<!-- ======= Home Section ======= -->
+		<section
+			id="home"
+			class="d-flex flex-column justify-content-center align-items-center"
+		>
+			<div class="home-container" data-aos="fade-in">
+				<h1>BusPotiguar</h1>
+				<p>
+					Seu destino
+					<span
+						class="typed"
+						data-typed-items="mais perto de você!, é nossa prioridade!"
+					></span>
+				</p>
+				<button id="btn-dark-mode-toggle" data-aos="fade-in"></button>
+				<button class="increaseFont" data-aos="fade-in" value="increase">
+					A+
+				</button>
+				<button class="decreaseFont" data-aos="fade-in" value="decrease">
+					A-
+				</button>
+			</div>
+		</section>
+		<!-- End Home -->
 
-  <!-- ======= Header ======= -->
-  <header id="header">
-    <div class="d-flex flex-column">
+		<main id="main_index">
+			<section>
+				<div class="container">
+					<div class="section-title" id="section-title-home">
+						<h2 class="mb-3" data-aos="fade-right">Quem somos nós</h2>
+					</div>
+				</div>
+			</section>
+			<p data-aos="fade-right" class="main_paragraph">
+				Somos um Grupo com mais de 10 mil colaboradores sob a mesma Cultura,
+				Valores e um Modelo de Gestão único, dedicados a oferecer soluções de
+				mobilidade confiáveis e eficientes para a nossa comunidade. Fundada por
+				um grupo de grandes investidores apaixonados por inovação e
+				comprometidos com o desenvolvimento sustentável de Nova Cruz, a
+				BusPotiguar tem como missão conectar pessoas, bairros e municípios por
+				meio de um serviço de transporte intermunicipal de excelência. Desde o
+				início, buscamos aprimorar a qualidade de vida dos nossos cidadãos,
+				tornando o deslocamento na região mais acessível e conveniente.
+			</p>
+			<section>
+				<div class="container">
+					<div class="section-title" id="section-title-home">
+						<h2 class="mb-3" data-aos="fade-right">Nosso Compromisso</h2>
+					</div>
+				</div>
+			</section>
+			<p data-aos="fade-right" class="main_paragraph">
+				Na BusPotiguar, acreditamos que o transporte público é uma parte
+				fundamental do desenvolvimento de uma cidade. Estamos empenhados em
+				fornecer serviços de transporte seguros, acessíveis e sustentáveis, que
+				atendam às necessidades de todos os cidadãos de Nova Cruz e região.
+				Nossos ônibus são modernos, confortáveis e equipados com tecnologia de
+				ponta para garantir viagens agradáveis e confiáveis.
+			</p>
 
-      <div class="profile">
-        <img src="assets/img/profile-img.png" alt="" class="img-fluid rounded-circle">
-        <h1 class="text-light"><a href="index.html">BusPotiguar</a></h1>
-        <div class="social-links mt-3 text-center">
-          <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
-          <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
-          <a href="#" class="instagram"><i class="bx bxl-instagram"></i></a>
-          <a href="#" class="linkedin"><i class="bx bxl-linkedin"></i></a>
-        </div>
-      </div>
+			<section>
+				<div class="container">
+					<div class="section-title" id="section-title-home">
+						<h2 class="mb-3" data-aos="fade-right">Nossas Rotas</h2>
+					</div>
+				</div>
+			</section>
+			<p data-aos="fade-right" class="main_paragraph">
+				Operamos uma extensa rede de rotas intermunicipais que conectam Nova
+				Cruz a cidades vizinhas, facilitando o acesso de nossos passageiros a
+				diferentes pontos da região. Nossos motoristas são treinados para
+				proporcionar viagens seguras e tranquilas, respeitando rigorosamente os
+				horários e itinerários estabelecidos.
+			</p>
 
-      <nav id="navbar" class="nav-menu navbar">
-        <ul>
-          <li><a href="#" class="nav-link scrollto active"><i class="bx bx-home"></i> <span>Home</span></a></li>
-          <li><a href="itinerario.html" class="nav-link scrollto"><i class="bx bx-time"></i> <span>Horários e Itinerários</span></a></li>
-          <li><a href="favoritos.html" class="nav-link scrollto"><i class="bx bx-user"></i> <span>Meus Favoritos</span></a></li>
-          <li><a href="suporte.html" class="nav-link scrollto"><i class="bx bx-envelope"></i> <span>Suporte</span></a></li>
-        </ul>
-      </nav><!-- .nav-menu -->
-    </div>
-  </header><!-- End Header -->
+			<section>
+				<div class="container">
+					<div class="section-title" id="section-title-home">
+						<h2 class="mb-3" data-aos="fade-right">Principais Valores</h2>
+					</div>
+				</div>
+			</section>
 
-  <!-- ======= Home Section ======= -->
-  <section id="home" class="d-flex flex-column justify-content-center align-items-center">
-    <div class="home-container" data-aos="fade-in">
-      <h1>BusPotiguar</h1>
-      <p>Seu destino <span class="typed" data-typed-items="mais perto de você!, é nossa prioridade!"></span></p>
-    </div>
-  </section><!-- End Home -->
+			<div class="box-flip" data-aos="fade-right">
+				<div class="container-flip">
+					<div class="flip">
+						<div class="front-client"></div>
 
-  <main id="main">
+						<div class="back-client">
+							<p>
+								<strong>
+									O maior foco de nossa existência empresarial. Nosso objetivo é
+									Escutar e entender nossos clientes para oferecer um
+									atendimento humanizado e entrega de serviços com qualidade.
+								</strong>
+							</p>
+						</div>
+					</div>
+				</div>
 
-  </main><!-- End #main -->
+				<div class="container-flip">
+					<div class="flip">
+						<div class="front-simplicity"></div>
 
-  <!-- ======= Footer ======= -->
-  <footer id="footer">
-    <div class="container">
-      </div>
-    </div>
-  </footer><!-- End  Footer -->
+						<div class="back-simplicity">
+							<p>
+								<strong>
+									Através de nossas plataformas digitais visamos compartilhar
+									informações de maneira direta e objetiva, com foco na melhor
+									experiência de usuário possível
+								</strong>
+							</p>
+						</div>
+					</div>
+				</div>
 
-  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+				<div class="container-flip">
+					<div class="flip">
+						<div class="front-sustainability"></div>
 
-  <!-- Vendor JS Files -->
-  <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
-  <script src="assets/vendor/aos/aos.js"></script>
-  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
-  <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
-  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
-  <script src="assets/vendor/typed.js/typed.umd.js"></script>
-  <script src="assets/vendor/waypoints/noframework.waypoints.js"></script>
-  <script src="assets/vendor/php-email-form/validate.js"></script>
-  <script src="assets/js/onibus_teste.js"></script>
+						<div class="back-sustainability">
+							<p>
+								<strong>
+									Atitudes economicamente viáveis, ecologicamente corretas e
+									socialmente justas.
+								</strong>
+							</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</main>
+		<!-- End #main -->
 
+		<!-- ======= Footer ======= -->
+		<footer id="footer">
+			<div class="container"></div>
+		</footer>
+		<!-- End  Footer -->
 
-  <!-- Template Main JS File -->
-  <script src="assets/js/main.js"></script>
+		<a
+			href="#"
+			class="back-to-top d-flex align-items-center justify-content-center"
+			><i class="bi bi-arrow-up-short"></i
+		></a>
 
-</body>
+		<!-- Vendor JS Files -->
+		<script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
+		<script src="assets/vendor/aos/aos.js"></script>
+		<script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+		<script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+		<script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+		<script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+		<script src="assets/vendor/typed.js/typed.umd.js"></script>
+		<script src="assets/vendor/waypoints/noframework.waypoints.js"></script>
+		<script src="assets/vendor/php-email-form/validate.js"></script>
+		<script src="assets/js/onibus_teste.js"></script>
 
+		<!-- Template Main JS File -->
+		<script src="assets/js/main.js"></script>
+	</body>
 </html>

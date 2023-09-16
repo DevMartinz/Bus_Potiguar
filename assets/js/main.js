@@ -260,3 +260,28 @@
   new PureCounter();
 
 })()
+
+
+$(".increaseFont,.decreaseFont").click(function(){
+  var type= $(this).val();
+  var main_paragraph = $('.main_paragraph').css('font-size');
+  // var h4 = $('h4').css('font-size');
+  // var p = $('p').css('font-size');
+  // var text =$('#text').css('font-size');
+  // var btnbuscar = $('#btn-buscar').css('font-size');
+
+  if(type=='increase'){
+     $('.main_paragraph').css('font-size', parseInt(main_paragraph)+1);
+    //  $('h4').css('font-size', parseInt(h4)+1);
+    //  $('p').css('font-size', parseInt(p)+1);
+    //  $('#text').css('font-size', parseInt(text)+1);
+    //  $('#btn-buscar').css('font-size', parseInt(btnbuscar)+1);
+  } else{
+     $('.main_paragraph').css('font-size', parseInt(main_paragraph)-1);
+    //  $('h4').css('font-size', parseInt(h4)-1);
+    //  $('p').css('font-size', parseInt(p)-1);
+    //  $('#text').css('font-size', parseInt(text)-1);
+    //  $('#btn-buscar').css('font-size', parseInt(btnbuscar)-1);
+  }
+  // alert($('.data').css('font-size'));
+});
