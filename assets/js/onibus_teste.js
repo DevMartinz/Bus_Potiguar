@@ -1,6 +1,6 @@
 var URL_BASE = "http://localhost:8080/";
-const btnDarkModeToggle = document.getElementById("btn-dark-mode-toggle");
-const themeSystem = localStorage.getItem("themeSystem") || "light";
+let btnDarkModeToggle = document.getElementById("btn-dark-mode-toggle");
+let themeSystem = localStorage.getItem("themeSystem") || "light";
 
 function updateList() {
   $.ajax(URL_BASE + "rota/", {
