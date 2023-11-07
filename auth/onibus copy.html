@@ -1,0 +1,77 @@
+<main id="main">
+	<section id="fav" class="favoritos">
+			<div class="container">
+					<div class="section-title">
+							<h2 class="mb-3">Gerenciar Ônibus</h2>
+							<button id="btn-dark-mode-toggle"></button>
+					</div>
+					<div id="informacao"></div>
+					<hr />
+					<div class="row">
+							<form id="form">
+									<div class="col-12 col-sm-6">
+											<div class="row">
+													<div class="col-sm-4">
+															<div class="form-group">
+																	<label for="numOnibus">Número do ônibus</label>
+																	<input type="text" class="form-control" id="numOnibus" name="numOnibus" placeholder="">
+															</div>
+													</div>
+													<div class="col-sm-4">
+															<div class="form-group">
+																	<label for="horaSaida">Embarque</label>
+																	<input type="text" class="form-control" id="horaSaida" name="horaSaida" placeholder="">
+															</div>
+													</div>
+													<div class="col-sm-4">
+															<div class="form-group">
+																	<label for="horaChegada">Desembarque</label>
+																	<input type="text" class="form-control" id="horaChegada" name="horaChegada" placeholder="">
+															</div>
+													</div>
+											</div>
+									</div>
+									<div class="col-12 col-sm-6">
+											<div class="row">
+													<div class="col-sm-4">
+															<div class="form-group">
+																	<label for="valorLinha">Valor</label>
+																	<input type="text" class="form-control" id="valorLinha" name="valorLinha" placeholder="">
+															</div>
+													</div>
+													<div class="col-sm-4">
+															<div class="form-group">
+																	<label for="acessibilidade">Acessibilidade</label>
+																	<input type="text" class="form-control" id="acessibilidade" name="acessibilidade" placeholder="">
+															</div>
+													</div>
+													<div class="col-sm-4">
+															<div class="form-group">
+																	<label for="week">Disponibilidade</label>
+																	<input type="text" class="form-control" id="week" name="week" placeholder="">
+															</div>
+													</div>
+											</div>
+									</div>
+							</form>
+					</div>
+					<div class="row p-3">
+							<button id="bus_submit" class="btn btn-primary col-sm-6">Salvar</button>
+					</div>
+					<hr />
+					<table class="table">
+							<thead class="thead-dark">
+									<tr>
+											<th scope="col">Número</th>
+											<th scope="col">Hora da Saida</th>
+											<th scope="col">Hora da Chegada</th>
+											<th scope="col">Valor da Rota</th>
+											<th scope="col"></th>
+											<th scope="col"></th>
+									</tr>
+							</thead>
+							<tbody id="busContent"></tbody>
+					</table>
+			</div>
+	</section>
+</main>

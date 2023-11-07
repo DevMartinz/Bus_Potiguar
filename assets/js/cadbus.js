@@ -1,5 +1,6 @@
 var URL_BASE = "http://localhost:8080/";
 var URL_EDIT = null;
+var informacao = "";
 
 $(function(){
     $('#bus_submit').click(save);
@@ -30,13 +31,15 @@ function save(){
         }).done(function(res) {
             // console.log(res);
     
-            URL_EDIT = "http://20.96.161.7/" + res.id;
+            URL_EDIT = null;
             //atualiza a lista após salvar
             updateList();
         })
         .fail(function(res) {
             // console.log(res);
         });
+
+        return false;
 }
 
 function updateList(){ 
@@ -50,6 +53,7 @@ function updateList(){
         $(res._embedded.onibus).each(function(k,el){
             let onibus = el;
             // console.log(onibus._links);
+            informacao += `<p>Numero do Onibus: ${onibus.numOnibus}</p>`;
             tr = $(`<tr><td>${onibus.numOnibus}</td><td>${onibus.horaSaida}</td><td>${onibus.horaChegada}</td><td>${onibus.valorLinha}</td>
             <td>
                 <a href="#" onclick="edit('${onibus._links.self.href}')"><i class="bi bi-pencil-square"></i></a>

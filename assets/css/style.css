@@ -27,7 +27,8 @@ body {
 	background-color: var(--white);
 }
 
-body p, label {
+body p,
+label {
 	color: var(--paragraph);
 }
 
@@ -155,12 +156,12 @@ h6 {
 	margin-left: 300px;
 }
 
-#main_index p{
-  font-family: azo-sans-web,sans-serif;
-  font-weight: 400;
-  font-style: normal;
-  color: var(--paragraph);
-  font-size: 18px;
+#main_index p {
+	font-family: azo-sans-web, sans-serif;
+	font-weight: 400;
+	font-style: normal;
+	color: var(--paragraph);
+	font-size: 18px;
 	margin-right: 5%;
 	margin-left: 5.5%;
 }
@@ -174,7 +175,7 @@ h6 {
 	gap: 20px;
 }
 
-#main_index .box-flip p{
+#main_index .box-flip p {
 	color: #fff;
 }
 
@@ -396,53 +397,53 @@ h6 {
 }
 
 .front-client {
-	background-image: url(../img/Valores/Clientes\ \(1\).png);
-  background-position:27%;
+	background-image: url(../img/Valores/Clientes1.png);
+	background-position: 27%;
 	background-size: cover;
 }
 
 .back-client {
-	background-image: url(../img/Valores/Cópia\ de\ Clientes\ \(1\).png);
-  background-size: cover;
+	background-image: url(../img/Valores/Clientes2.png);
+	background-size: cover;
 	transform: rotateY(180deg);
 	display: flex;
 	align-items: center;
 	justify-content: center;
-  text-align: center;
+	text-align: center;
 	color: #fff;
 }
 
-.front-simplicity{
-  background-image: url(../img/Valores/Simplicidade\ \(1\).png);
-  background-position:52%;
+.front-simplicity {
+	background-image: url(../img/Valores/Simplicidade1.png);
+	background-position: 52%;
 	background-size: cover;
 }
 
 .back-simplicity {
 	background-image: url(../img/Valores/Cópia\ de\ Simplicidade.png);
-  background-size: cover;
+	background-size: cover;
 	transform: rotateY(180deg);
 	display: flex;
 	align-items: center;
 	justify-content: center;
-  text-align: center;
+	text-align: center;
 	color: #fff;
 }
 
-.front-sustainability{
-  background-image: url(../img/Valores/S.png);
-  background-position:42%;
+.front-sustainability {
+	background-image: url(../img/Valores/S.png);
+	background-position: 42%;
 	background-size: cover;
 }
 
 .back-sustainability {
 	background-image: url(../img/Valores/Cópia\ de\ Sustentabilidade.png);
-  background-size: cover;
+	background-size: cover;
 	transform: rotateY(180deg);
 	display: flex;
 	align-items: center;
 	justify-content: center;
-  text-align: center;
+	text-align: center;
 	color: #fff;
 }
 
@@ -631,8 +632,6 @@ section {
 }
 
 .horarios .info {
-
-
 	padding: 30px;
 	background: var(--gray);
 	width: 100%;
@@ -1081,3 +1080,20 @@ section {
 #g_id_logado {
 	display: none;
 }
+
+
+.container-image {
+	display: flex;
+	position: relative;
+	margin: 0 auto;
+	justify-content: center;
+	justify-items: center;
+	padding: 0;
+	margin-bottom: 20px;
+}
+
+.container-image img {
+	width: 45%;
+	border-radius: 5%;
+}
+

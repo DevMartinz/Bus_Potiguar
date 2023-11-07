@@ -73,23 +73,18 @@
 							>
 						</li>
 						<li>
-							<a href="itinerario.html" class="nav-link scrollto"
+							<a href="#" class="nav-link scrollto active"
 								><i class="bx bx-time"></i>
 								<span>Horários e Itinerários</span></a
 							>
 						</li>
 						<li>
 							<a href="favoritos.html" class="nav-link scrollto"
-								><i class="bx bx-star"></i> <span>Meus Favoritos</span></a
+								><i class="bx bx-user"></i> <span>Meus Favoritos</span></a
 							>
 						</li>
 						<li>
-							<a href="pontos_turisticos.html" class="nav-link scrollto"
-								><i class="bx bx-map"></i> <span>Pontos turísticos</span></a
-							>
-						</li>
-						<li>
-							<a href="#" class="nav-link scrollto active"
+							<a href="suporte.html" class="nav-link scrollto"
 								><i class="bx bx-envelope"></i> <span>Suporte</span></a
 							>
 						</li>
@@ -101,126 +96,69 @@
 		<!-- End Header -->
 
 		<main id="main">
-			<!-- ======= Suporte Section ======= -->
-			<section id="suporte" class="suporte">
+			<!-- ======= Horarios Section ======= -->
+			<section id="horarios" class="horarios">
 				<div class="container">
-					<div class="section-title">
-						<h2 data-aos="fade-right">Suporte</h2>
+					<div
+						class="section-title"
+						style="margin-bottom: 0px; padding-bottom: 0px"
+					>
+						<h2 data-aos="fade-right">Lista de Rotas Favoritas</h2>
 						<button id="btn-dark-mode-toggle" data-aos="fade-in"></button>
-						<button
-							class="increaseFont"
-							data-aos="fade-in"
-							value="increase"
-						>
+						<button class="increaseFont" data-aos="fade-in" value="increase">
 							A+
 						</button>
-						<button
-							class="decreaseFont"
-							data-aos="fade-in"
-							value="decrease"
-						>
+						<button class="decreaseFont" data-aos="fade-in" value="decrease">
 							A-
 						</button>
-						<p data-aos="fade-right" class="information">
-							Abaixo estão nossas informações para contato caso hajam dúvidas,
-							críticas ou sugestões!
-						</p>
 					</div>
 
-					<div class="row" data-aos="fade-right" id="text">
-						<div class="col-lg-5 d-flex align-items-stretch">
-							<div class="info">
-								<div class="address">
-									<i class="bi bi-geo-alt"></i>
-									<h4>Local:</h4>
-									<p>R. Assis Chateaubriand,251 | Nova Cruz - RN 59215-000</p>
-								</div>
-
-								<div class="email">
-									<i class="bi bi-envelope"></i>
-									<h4>Email:</h4>
-									<p>sacbuspotiguar@gmail.com</p>
-								</div>
-
-								<div class="phone">
-									<i class="bi bi-phone"></i>
-									<h4>Whatsapp:</h4>
-									<p>84 99175-6211</p>
-								</div>
-
-								<iframe
-									src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3964.2972070892974!2d-35.43367992573016!3d-6.483994663393221!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zNsKwMjknMDIuNCJTIDM1wrAyNSc1Mi4wIlc!5e0!3m2!1spt-BR!2sbr!4v1690147997062!5m2!1spt-BR!2sbr"
-									frameborder="0"
-									style="border: 0; width: 100%; height: 290px"
-									allowfullscreen
-								></iframe>
-							</div>
-						</div>
-
-						<div class="col-lg-7 mt-5 mt-lg-0 d-flex align-items-stretch">
-							<form
-								action="forms/suporte.php"
-								method="post"
-								role="form"
-								class="php-email-form"
-							>
-								<div class="row">
-									<div class="form-group col-md-6">
-										<label for="name">Seu Nome</label>
-										<input
-											type="text"
-											name="name"
-											class="form-control"
-											id="name"
-											required
-										/>
-									</div>
-									<div class="form-group col-md-6">
-										<label for="name">Seu Email</label>
-										<input
-											type="email"
-											class="form-control"
-											name="email"
-											id="email"
-											required
-										/>
-									</div>
-								</div>
-								<div class="form-group">
-									<label for="name">Assunto</label>
-									<input
-										type="text"
-										class="form-control"
-										name="subject"
-										id="subject"
-										required
+					<div
+						class="col-lg-8 d-flex align-items-stretch"
+						data-aos="fade-right"
+						id="text"
+					>
+						<div class="info">
+							<div class="row">
+								<p class="fst-italic" data-aos="fade-right">
+									Selecione a Linha e o Dia desejado, para exibir mais
+									informações sobre a rota.
+								</p>
+								<div class="col-lg-8" data-aos="fade-right">
+									<img
+										src="assets/img/test2.jpg"
+										class="img-fluid"
+										alt=""
+										id="img_horario"
 									/>
 								</div>
-								<div class="form-group">
-									<label for="name">Mensagem</label>
-									<textarea
-										class="form-control"
-										name="message"
-										rows="10"
-										required
-									></textarea>
-								</div>
-								<div class="my-3">
-									<div class="loading">Carregando</div>
-									<div class="error-message"></div>
-									<div class="sent-message">
-										Sua mensagem foi enviada! Em breve entraremos em contato!
+								<div
+									class="col-lg-8 pt-0 pt-lg-0 content"
+									data-aos="fade-right"
+								>
+									<div class="row">
+										<label for="linhas" style="margin-top: 1.8%"
+											>Escolha uma Linha:</label
+										>
+										<select id="sel-linha"></select>
 									</div>
+									<div class="row">
+										<label for="linhas">Escolha o dia:</label>
+										<select name="dia" id="sel-dia">
+											<option value="1">Segunda - Sexta</option>
+											<option value="2">Feriado ou Final de Semana</option>
+										</select>
+									</div>
+									<a href="rotas.html" id="btn-buscar" class="btn btn-success"
+										>Buscar</a
+									>
 								</div>
-								<div class="text-center">
-									<button type="submit">Enviar Mensagem</button>
-								</div>
-							</form>
+							</div>
 						</div>
 					</div>
 				</div>
 			</section>
-			<!-- End Suporte Section -->
+			<!-- End Horarios Section -->
 		</main>
 
 		<!-- ======= Footer ======= -->
@@ -248,6 +186,8 @@
 
 		<!-- Template Main JS File -->
 		<script src="assets/js/main.js"></script>
+		<script src="assets/js/onibus_teste.js"></script>
 		<script src="assets/js/bus.js"></script>
+		<script src="https://kit.fontawesome.com/998c60ef77.js"></script>
 	</body>
 </html>
