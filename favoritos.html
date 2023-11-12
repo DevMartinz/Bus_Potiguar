@@ -106,7 +106,13 @@
 				<div class="container">
 					<div class="section-title">
 						<h2 class="mb-3">Favoritos</h2>
-						<button id="btn-dark-mode-toggle"></button>
+						<button id="btn-dark-mode-toggle" data-aos="fade-in"></button>
+						<button class="increaseFont" data-aos="fade-in" value="increase">
+							A+
+						</button>
+						<button class="decreaseFont" data-aos="fade-in" value="decrease">
+							A-
+						</button>
 					</div>
 					<!-- Tela de pré-login -->
 					<div id="tela-pre-login">
@@ -143,44 +149,49 @@
 					<div id="botao"></div>
 					<div id="informacao"></div>
 					<div id="g_id_logado">
-						<section id="bus" class="bus">
-							<div class="container">
-								<div class="section-title">
-									<h2 id="titulo_rotas"></h2>
-								</div>
-								<div class="col-lg-8 pt-4 pt-lg-0 content" data-aos="fade-left">
-									<label for="ro" style="margin-top: 1.8%"
-										>Escolha uma Linha:</label
+						<div
+							class="col-lg-8 d-flex align-items-stretch"
+							data-aos="fade-right"
+							id="text"
+						>
+							<div class="info">
+								<div class="row">
+									<p class="fst-italic" data-aos="fade-right">
+										Selecione a Linha e o Dia desejado, para exibir mais
+										informações sobre a rota.
+									</p>
+									<div class="col-lg-8" data-aos="fade-right">
+										<img
+											src="assets/img/test2.jpg"
+											class="img-fluid"
+											alt=""
+											id="img_horario"
+										/>
+									</div>
+									<div
+										class="col-lg-8 pt-0 pt-lg-0 content"
+										data-aos="fade-right"
 									>
-									<select id="ro" name="rota_id"></select>
-
-									<hr />
-									<table class="table">
-										<thead class="thead-dark">
-											<tr>
-												<th scope="col">Ônibus</th>
-												<th scope="col">Horário de Saída</th>
-												<th scope="col">Horário de Chegada</th>
-												<th scope="col">Acessibilidade</th>
-												<th scope="col">Valor</th>
-											</tr>
-										</thead>
-										<tbody id="horario_table"></tbody>
-									</table>
-
-									<hr />
-									<table class="table">
-										<thead class="thead-dark">
-											<tr>
-												<th scope="col">Lista de Paradas</th>
-											</tr>
-										</thead>
-										<tbody id="tableContent"></tbody>
-									</table>
+										<div class="row">
+											<label for="linhas" style="margin-top: 1.8%"
+												>Escolha uma Linha:</label
+											>
+											<select id="sel-linha-fav"></select>
+										</div>
+										<div class="row">
+											<label for="linhas">Escolha o dia:</label>
+											<select name="dia" id="sel-dia">
+												<option value="1">Segunda - Sexta</option>
+												<option value="2">Feriado ou Final de Semana</option>
+											</select>
+										</div>
+										<a href="rotas.html" id="btn-buscar" class="btn btn-success"
+											>Buscar</a
+										>
+									</div>
 								</div>
 							</div>
-						</section>
-						<!-- End Horarios Section -->
+						</div>
 					</div>
 				</div>
 			</section>

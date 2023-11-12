@@ -107,11 +107,11 @@
 				<div class="container">
 					<div class="section-title">
 						<h2 class="mb-3">Gerenciar Rotas</h2>
-						<button id="btn-dark-mode-toggle"></button>
+						<button id="btn-dark-mode-toggle" data-aos="fade-in"></button>
 					</div>
 					<div id="informacao"></div>
 					<hr />
-					<div class="container card col-sm-4 text-start">
+					<div class="container card col-sm-4 text-start" id="container_card">
 						<form id="form">
 							<div class="col-sm p-1">
 								<label for="nomeRota" class="form-label">Nome da Rota</label>
@@ -131,7 +131,7 @@
 						</div>
 					</div>
 					<hr />
-					<table class="table">
+					<table class="table table-hover" id="horarioTable"">
 						<thead class="thead-dark">
 							<tr>
 								<th scope="col">Nome da Rota</th>

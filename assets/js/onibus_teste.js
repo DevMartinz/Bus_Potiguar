@@ -7,7 +7,8 @@ function updateList() {
     method: "get",
   })
     .done(function (res) {
-      // console.log(res);
+      console.log("Eita:");
+      console.log(res);
 
       let select = $("#sel-linha");
       select.html("");

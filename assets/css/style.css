@@ -20,6 +20,20 @@
 	--base_color2: #2d70ce;
 	--gray: #1f1f1f;
 	--paragraph: #fff;
+	--bs-table-bg: #121212;
+}
+
+[data-theme="dark"] #horarioTable,
+[data-theme="dark"] #horarioTable thead,
+[data-theme="dark"] #horarioTable tbody,
+[data-theme="dark"] #horarioTable th,
+[data-theme="dark"] #horarioTable td {
+	background-color: #121212 !important;
+	color: #fff !important;
+}
+
+[data-theme="dark"] #horarioTable tbody tr:hover td {
+	background-color: #2d2d2d !important;
 }
 
 body {
@@ -1081,7 +1095,6 @@ section {
 	display: none;
 }
 
-
 .container-image {
 	display: flex;
 	position: relative;
@@ -1097,3 +1110,16 @@ section {
 	border-radius: 5%;
 }
 
+[data-theme="dark"] #container_card {
+	--bs-card-bg: var(--white) !important;
+	--bs-card-border-color: #828282 !important;
+}
+
+[data-theme="dark"] input {
+	color: var(--white);
+}
+
+[data-theme="dark"] input::placeholder {
+	color: var(--white);
+	-webkit-text-fill-color: var(--white);
+}
