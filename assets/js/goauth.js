@@ -44,6 +44,7 @@ function checkUserExists(idGoogle) {
 				const foundUser = userArray.find((user) => user.idGoogle === idGoogle);
 
 				if (foundUser) {
+					console.log("encontrou");
 					resolve(foundUser); // Resolve a Promise com o usuário encontrado
 				} else {
 					reject(new Error("Usuário não encontrado"));
@@ -61,14 +62,16 @@ function checkUserExists(idGoogle) {
 
 // Função para criar um novo usuário no banco de dados
 function createUser(email, name, idGoogle) {
-	return $.ajax(URL_BASE + "usuario", {
-		method: "post",
+	return $.ajax(URL_BASE + "login", {
+		method: "POST",
 		data: JSON.stringify({
 			email: email,
 			nomeUser: name,
 			idGoogle: idGoogle,
 		}),
 		contentType: "application/json",
+	}).done(function (res) {
+		console.log(res);
 	});
 }
 
@@ -87,20 +90,69 @@ function loginCallback(resp) {
 
 	// Verifica se o usuário já existe com base no idGoogle
 	console.log("checkUserExists");
+	console.log(cred.sub);
 	checkUserExists(cred.sub)
 		.then(function (user) {
 			console.log("checkUserExists resolved. User:", user);
+			//lasanha
 			// Se o usuário existe, você pode executar qualquer ação adicional que desejar aqui
 			if (user.nivel === 100) {
-				var url = "/auth/rotas.html";
-				window.location.href = url;
+				console.log("entrou2");
+
+				createUser(cred.email, cred.name, cred.sub)
+					.done(function (res) {
+						console.log("caiu aqui");
+						console.log(res);
+						const token = res.token;
+						console.log("Token:", token);
+						const decodedToken = jwt_decode(token);
+						console.log("Decoded Token:", decodedToken);
+						const userId = decodedToken.sub;
+						const ID = decodedToken.id;
+						console.log("ID:", ID);
+						console.log("Userid:", userId);
+						localStorage.setItem("authToken", res.token);
+
+						var url = "/auth/rotas.html";
+						window.location.href = url;
+					})
+					.fail(function (res) {
+						console.error(
+							"Erro ao salvar a ID do usuário no banco de dados:",
+							res
+						);
+						console.log(res);
+					});
 			} else {
 				if (user.nivel === 1) {
+					createUser(cred.email, cred.name, cred.sub)
+						.done(function (res) {
+							console.log("caiu aqui");
+							console.log(res);
+							const token = res.token;
+							console.log("Token:", token);
+							const decodedToken = jwt_decode(token);
+							console.log("Decoded Token:", decodedToken);
+							const userId = decodedToken.sub;
+							const ID = decodedToken.id;
+							console.log("ID:", ID);
+							console.log("Userid:", userId);
+							localStorage.setItem("authToken", res.token);
+						})
+						.fail(function (res) {
+							console.error(
+								"Erro ao salvar a ID do usuário no banco de dados:",
+								res
+							);
+							console.log(res);
+						});
+
 					const urlParams = new URLSearchParams(window.location.search);
 					const opcValuetest = urlParams.get("opc");
 					const opcValue = parseInt(opcValuetest);
 					userData = user.id;
 					console.log("teste:" + userData);
+					console.log("teste2:" + opcValue);
 					if (opcValue) {
 						console.log("entrou aqui");
 						console.log(resp);
@@ -172,16 +224,27 @@ function loginCallback(resp) {
 		})
 		.catch(function (error) {
 			// Se o usuário não existe, crie um novo registro
+			console.log("caiu aqui");
 			createUser(cred.email, cred.name, cred.sub)
 				.done(function (res) {
+					console.log("caiu aqui");
 					const urlParams = new URLSearchParams(window.location.search);
 					const opcValuetest = urlParams.get("opc");
 					const opcValue = parseInt(opcValuetest);
+					console.log(res);
+					const token = res.token;
+					console.log("Token:", token);
+					const decodedToken = jwt_decode(token);
+					console.log("Decoded Token:", decodedToken);
+					const userId = decodedToken.sub;
+					const ID = decodedToken.id;
+					console.log("ID:", ID);
+					console.log("Userid:", userId);
+					localStorage.setItem("authToken", res.token);
 
-					// Extrai o ID do usuário da URL
-					const userIdMatch = res._links.self.href.match(/\/(\d+)$/);
-					if (userIdMatch && userIdMatch[1]) {
-						userData = userIdMatch[1];
+					// Extrai o ID do usuário do Token
+					if (ID) {
+						userData = ID;
 						console.log("teste:" + userData);
 
 						if (opcValue) {
@@ -333,6 +396,7 @@ $(function () {
 function logout() {
 	// Limpa o token do localStorage
 	localStorage.removeItem("gauth-token");
+	localStorage.removeItem("authToken");
 
 	// Esconde a tela de pós-login
 	document.getElementById("g_id_logado").style.display = "none";

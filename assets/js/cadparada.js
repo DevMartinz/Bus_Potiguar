@@ -1,6 +1,7 @@
 var URL_BASE = "http://localhost:8080/";
 var URL_EDIT = null;
 var informacao = "";
+var authToken = localStorage.getItem("authToken");
 
 $(function () {
 	$("#paradas_submit").click(save);
@@ -28,6 +29,9 @@ function save() {
 		data: JSON.stringify(dados),
 		method: method,
 		contentType: "application/json",
+		headers: {
+			Authorization: "Bearer " + authToken,
+		},
 	})
 		.done(function (res) {
 			// console.log(res);

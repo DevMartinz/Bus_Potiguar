@@ -58,4 +58,13 @@ function defineCurrentTheme(theme) {
 	}
 }
 
+function logout() {
+	// Limpa o token do localStorage
+	localStorage.removeItem("gauth-token");
+	localStorage.removeItem("authToken");
+
+	var url = "../index.html";
+	window.location.href = url;
+}
+
 defineCurrentTheme(themeSystem);
