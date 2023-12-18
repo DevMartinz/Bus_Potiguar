@@ -1,36 +1,70 @@
 var URL_BASE = "http://localhost:8080/";
-let btnDarkModeToggle = document.getElementById("btn-dark-mode-toggle");
+let btnDarkMode = document.getElementById("btn-dark-mode-toggle");
 let themeSystem = localStorage.getItem("themeSystem") || "light";
 
-$(function () {
-	//Sempre que carregar a página atualiza a lista
-	updateList();
-});
-
 function updateList() {
-	$.ajax(URL_BASE + "onibus", {
+	$.ajax(URL_BASE + "rota/", {
 		method: "get",
 	})
 		.done(function (res) {
-			let table = $("#tableContent");
-			table.html("");
-			$(res._embedded.onibus).each(function (k, el) {
-				let onibus = el;
-				tr = $(
-					`<tr><td>${onibus.numOnibus}</td><td>${onibus.horaSaida}</td><td>${onibus.horaChegada}</td><td>${onibus.valorLinha}</td><td>${onibus.acessibilidade}</td></tr>`
-				);
-				table.append(tr);
+			let select = $("#sel-linha");
+			select.html("");
+
+			res.forEach(function (rota) {
+				let option = $("<option></option>")
+					.attr("value", rota.id)
+					.text(rota.nomeRota);
+				select.append(option);
 			});
+
+			// $(res).each(function(index,el){
+			//     let rota = el;
+			//     let option =  $('<option></option>').attr('value', rota.id).text(rota.nomeRota);
+			//     select.append(option);
+			// })
 		})
 		.fail(function (res) {
-			let table = $("#tableContent");
-			table.html("");
-			tr = $(`<tr><td colspan='4'>Não foi possível carregar a lista</td></tr>`);
-			table.append(tr);
+			let select = $("#sel-linha");
+			select.html("");
+			let option = $("<option></option>").text(
+				"Não foi possível carregar as opções"
+			);
+			select.append(option);
 		});
 }
 
-btnDarkModeToggle.addEventListener("click", () => {
+$(function () {
+	$("#submit").click(save);
+
+	//Sempre que carregar a página atualiza a lista
+	updateList();
+
+	$("#sel-linha").change(function () {
+		var select = $(this).val();
+		var rotaSelecionada = parseInt(select) + 1;
+	});
+
+	$("#btn-buscar").click(function (e) {
+		e.preventDefault(); // Impede o comportamento padrão do link
+
+		var select = $("#sel-linha").val();
+		var dia = $("#sel-dia").val();
+		var url = "rotas.html?opc=" + select + "&sel=" + dia;
+		window.location.href = url;
+	});
+});
+
+function save() {
+	//envia para o backend
+	$.ajax(URL_BASE + "rota", {})
+		.done(function (res) {
+			//atualiza a lista após salvar
+			updateList();
+		})
+		.fail(function (res) {});
+}
+
+btnDarkMode.addEventListener("click", () => {
 	let oldTheme = localStorage.getItem("themeSystem") || "light";
 	let newTheme = oldTheme == "light" ? "dark" : "light";
 
@@ -45,35 +79,34 @@ function defineCurrentTheme(theme) {
 		"<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' class='bi bi-sun' viewBox='0 0 16 16'><path d='M8 11a3 3 0 1 1 0-6 3 3 0 0 1 0 6zm0 1a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0zm0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13zm8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5zM3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8zm10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0zm-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0zm9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707zM4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708z'/></svg>";
 	document.documentElement.setAttribute("data-theme", theme);
 	if (theme == "light") {
-		btnDarkModeToggle.innerHTML = darkSvg;
+		btnDarkMode.innerHTML = darkSvg;
 	} else {
-		btnDarkModeToggle.innerHTML = lightSvg;
+		btnDarkMode.innerHTML = lightSvg;
 	}
 }
 
 defineCurrentTheme(themeSystem);
 
-$(".increaseFont,.decreaseFont").click(function(){
-  var type= $(this).val();
-  var information = $('#information').css('font-size');
-  var h4 = $('h4').css('font-size');
-  var p = $('p').css('font-size');
-  var text =$('#text').css('font-size');
-  var btnbuscar = $('#btn-buscar').css('font-size');
+$(".increaseFont,.decreaseFont").click(function () {
+	var type = $(this).val();
+	var information = $("#information").css("font-size");
+	var h4 = $("h4").css("font-size");
+	var p = $("p").css("font-size");
+	var text = $("#text").css("font-size");
+	var btnbuscar = $("#btn-buscar").css("font-size");
 
-  if(type=='increase'){
-     $('#information').css('font-size', parseInt(information)+1);
-     $('h4').css('font-size', parseInt(h4)+1);
-     $('p').css('font-size', parseInt(p)+1);
-     $('#text').css('font-size', parseInt(text)+1);
-     $('#btn-buscar').css('font-size', parseInt(btnbuscar)+1);
-  } else{
-     $('#information').css('font-size', parseInt(information)-1);
-     $('h4').css('font-size', parseInt(h4)-1);
-     $('p').css('font-size', parseInt(p)-1);
-     $('#text').css('font-size', parseInt(text)-1);
-     $('#btn-buscar').css('font-size', parseInt(btnbuscar)-1);
-  }
-  // alert($('.data').css('font-size'));
+	if (type == "increase") {
+		$("#information").css("font-size", parseInt(information) + 1);
+		$("h4").css("font-size", parseInt(h4) + 1);
+		$("p").css("font-size", parseInt(p) + 1);
+		$("#text").css("font-size", parseInt(text) + 1);
+		$("#btn-buscar").css("font-size", parseInt(btnbuscar) + 1);
+	} else {
+		$("#information").css("font-size", parseInt(information) - 1);
+		$("h4").css("font-size", parseInt(h4) - 1);
+		$("p").css("font-size", parseInt(p) - 1);
+		$("#text").css("font-size", parseInt(text) - 1);
+		$("#btn-buscar").css("font-size", parseInt(btnbuscar) - 1);
+	}
+	// alert($('.data').css('font-size'));
 });
-

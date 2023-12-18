@@ -1,6 +1,7 @@
 var URL_BASE = "http://localhost:8080/";
 let btnDarkModeToggle = document.getElementById("btn-dark-mode-toggle");
 let themeSystem = localStorage.getItem("themeSystem") || "light";
+var gauthToken = localStorage.getItem("gauth-token");
 
 // Função para obter o valor do parâmetro "opc" da URL
 function getParamFromURL() {
@@ -10,24 +11,29 @@ function getParamFromURL() {
 	return opcValue;
 }
 
-// Função para obter o valor do parâmetro "test" da URL
-function getTestFromURL() {
+// Função para obter o valor do parâmetro "sel" da URL
+function getSelFromURL() {
 	const urlParams = new URLSearchParams(window.location.search);
-	const opcValuetest = urlParams.get("test");
-	const testValue = parseInt(opcValuetest);
-	return testValue;
+	const opcValueSel = urlParams.get("sel");
+	const selValue = parseInt(opcValueSel);
+	return selValue;
 }
 
 $(function () {
+	if (gauthToken !== null && gauthToken !== undefined) {
+		document.getElementById("trash").style.display = "";
+	} else {
+		document.getElementById("trash").style.display = "none";
+	}
 	//Sempre que carregar a página atualiza a lista
 	//selectList();
 	const opcValue = getParamFromURL();
-	const testValue = getTestFromURL();
+	const selValue = getSelFromURL();
 	const stropcValue = opcValue.toString();
-	const strtestValue = testValue.toString();
+	const strselValue = selValue.toString();
 
 	updateList(opcValue);
-	horarioList(stropcValue, strtestValue);
+	horarioList(stropcValue, strselValue);
 
 	$.ajax(URL_BASE + "rota/" + opcValue, {
 		method: "get",
@@ -40,14 +46,6 @@ $(function () {
 			let h2 = $("#titulo_rotas");
 			h2.text("Nome da Rota não encontrado"); // Caso não seja possível obter o nome da Rota
 		});
-	//     $('#rotas-sel').change(function() {
-	//         var select = $(this).val();
-	//         console.log(select);
-	//         var rotaSelecionada = parseInt(select) + 1;
-	//         console.log(rotaSelecionada);
-	//         updateList(rotaSelecionada);
-	//         horarioList(select);
-	//     });
 });
 
 function updateList(rotaSelecionada) {
@@ -55,13 +53,13 @@ function updateList(rotaSelecionada) {
 		method: "get",
 	})
 		.done(function (res) {
-			// console.log(res._embedded.paradaNome);
 			let table = $("#tableContent");
 			table.html("");
 			$(res._embedded.parada).each(function (k, el) {
 				let parada = el;
-				tr = $(`<tr><td>${parada.paradaNome}</td></tr>`);
-				// console.log(tableContent);
+				tr = $(
+					`<tr><td>${parada.paradaNome}</td><td>${parada.posicao}</td></tr>`
+				);
 				table.append(tr);
 			});
 		})
@@ -78,14 +76,10 @@ function selectList() {
 		method: "get",
 	})
 		.done(function (res) {
-			// console.log(res._embedded.rota);
 			let select = $("#rotas-sel");
-			// console.log(res);
 			select.html("");
 			$(res._embedded.rota).each(function (index, el) {
 				let rota = el;
-				// console.log(rota);
-				// console.log(index);
 				let option = $("<option></option>")
 					.attr("value", index)
 					.text(rota.nomeRota);
@@ -121,12 +115,6 @@ function horarioList(select, test) {
 					table.append(tr);
 				}
 			});
-
-			// let onibus = res._embedded.onibus[select];
-			// // console.log(rota);
-			// tr = $(`<tr><td>${onibus.numOnibus}</td><td>${onibus.horaSaida}</td><td>${onibus.horaChegada}</td><td>${onibus.acessibilidade}</td><td>${onibus.valorLinha}</td></tr>`);
-			// // console.log(tableContent);
-			// table.append(tr);
 		})
 		.fail(function (res) {
 			let table = $("#horario_table");
@@ -177,3 +165,72 @@ $(".increaseFont,.decreaseFont").click(function () {
 	}
 	// alert($('.data').css('font-size'));
 });
+
+//decodifica o jwt
+function jwtDecode(token) {
+	var base64Url = token.split(".")[1];
+	var base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
+	var jsonPayload = decodeURIComponent(
+		window
+			.atob(base64)
+			.split("")
+			.map(function (c) {
+				return "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2);
+			})
+			.join("")
+	);
+
+	return JSON.parse(jsonPayload);
+}
+
+$("#trash").click(function (e) {
+	e.preventDefault(); // Impede o comportamento padrão do link
+
+	cred = jwtDecode(gauthToken);
+	const opcValue = getParamFromURL();
+
+	checkUserExists(cred.sub).then(function (user) {
+		// Se o usuário existe, você pode executar qualquer ação adicional que desejar aqui
+
+		$.ajax(URL_BASE + "remover-favorito/" + user.id + "/" + opcValue, {
+			method: "PUT",
+			contentType: "application/json",
+		})
+			.done(function (res) {
+				var url = "../favoritos.html";
+				window.location.href = url;
+			})
+			.fail(function (res) {});
+	});
+});
+
+function checkUserExists(idGoogle) {
+	// Retornar uma Promise que será resolvida ou rejeitada
+	return new Promise((resolve, reject) => {
+		// Fazer uma requisição GET para obter todos os usuários do servidor
+		$.ajax(URL_BASE + "usuario/", {
+			method: "get",
+			contentType: "application/json",
+		})
+			.done(function (res) {
+				// Verificar se a resposta é um objeto (usuário único) ou uma lista (múltiplos usuários)
+				const userArray = Array.isArray(res) ? res : [res];
+
+				// Encontrar o usuário com o idGoogle correspondente
+				const foundUser = userArray.find((user) => user.idGoogle === idGoogle);
+
+				if (foundUser) {
+					resolve(foundUser); // Resolve a Promise com o usuário encontrado
+				} else {
+					reject(new Error("Usuário não encontrado"));
+				}
+			})
+			.fail(function (res) {
+				reject(
+					new Error(
+						"Erro ao verificar a existência do usuário no banco de dados"
+					)
+				);
+			});
+	});
+}

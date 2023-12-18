@@ -9,7 +9,6 @@ $(document).ajaxError(function (event, jqxhr, settings, thrownError) {
 
 //decodifica o jwt
 function jwtDecode(token) {
-	console.log("jwtDecode");
 	var base64Url = token.split(".")[1];
 	var base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
 	var jsonPayload = decodeURIComponent(
@@ -35,8 +34,6 @@ function checkUserExists(idGoogle) {
 			contentType: "application/json",
 		})
 			.done(function (res) {
-				console.log("API Response:", res);
-
 				// Verificar se a resposta é um objeto (usuário único) ou uma lista (múltiplos usuários)
 				const userArray = Array.isArray(res) ? res : [res];
 
@@ -44,7 +41,6 @@ function checkUserExists(idGoogle) {
 				const foundUser = userArray.find((user) => user.idGoogle === idGoogle);
 
 				if (foundUser) {
-					console.log("encontrou");
 					resolve(foundUser); // Resolve a Promise com o usuário encontrado
 				} else {
 					reject(new Error("Usuário não encontrado"));
@@ -70,47 +66,28 @@ function createUser(email, name, idGoogle) {
 			idGoogle: idGoogle,
 		}),
 		contentType: "application/json",
-	}).done(function (res) {
-		console.log(res);
-	});
+	}).done(function (res) {});
 }
 
 //essa é a funcao que o google irá chamar quando um usuario se autenticar
 function loginCallback(resp) {
-	console.log("loginCallback");
 	cred = jwtDecode(resp.credential);
 	//aqui voce podera ver todas as informacoes que o google retorna
-	// console.log(cred);
-	//salva o token inteiro, pois só é possível salvar strings no localStorage
-	//cuidado, esse token é mutavel, não pode ser usado como chave no banco
 	localStorage.setItem("gauth-token", resp.credential);
 	setLoginStatus(cred);
 	id_int = parseInt(cred.sub);
-	// userData = id_int;
 
 	// Verifica se o usuário já existe com base no idGoogle
-	console.log("checkUserExists");
-	console.log(cred.sub);
 	checkUserExists(cred.sub)
 		.then(function (user) {
-			console.log("checkUserExists resolved. User:", user);
-			//lasanha
 			// Se o usuário existe, você pode executar qualquer ação adicional que desejar aqui
 			if (user.nivel === 100) {
-				console.log("entrou2");
-
 				createUser(cred.email, cred.name, cred.sub)
 					.done(function (res) {
-						console.log("caiu aqui");
-						console.log(res);
 						const token = res.token;
-						console.log("Token:", token);
 						const decodedToken = jwt_decode(token);
-						console.log("Decoded Token:", decodedToken);
 						const userId = decodedToken.sub;
 						const ID = decodedToken.id;
-						console.log("ID:", ID);
-						console.log("Userid:", userId);
 						localStorage.setItem("authToken", res.token);
 
 						var url = "/auth/rotas.html";
@@ -121,22 +98,15 @@ function loginCallback(resp) {
 							"Erro ao salvar a ID do usuário no banco de dados:",
 							res
 						);
-						console.log(res);
 					});
 			} else {
 				if (user.nivel === 1) {
 					createUser(cred.email, cred.name, cred.sub)
 						.done(function (res) {
-							console.log("caiu aqui");
-							console.log(res);
 							const token = res.token;
-							console.log("Token:", token);
 							const decodedToken = jwt_decode(token);
-							console.log("Decoded Token:", decodedToken);
 							const userId = decodedToken.sub;
 							const ID = decodedToken.id;
-							console.log("ID:", ID);
-							console.log("Userid:", userId);
 							localStorage.setItem("authToken", res.token);
 						})
 						.fail(function (res) {
@@ -144,48 +114,32 @@ function loginCallback(resp) {
 								"Erro ao salvar a ID do usuário no banco de dados:",
 								res
 							);
-							console.log(res);
 						});
 
 					const urlParams = new URLSearchParams(window.location.search);
 					const opcValuetest = urlParams.get("opc");
 					const opcValue = parseInt(opcValuetest);
 					userData = user.id;
-					console.log("teste:" + userData);
-					console.log("teste2:" + opcValue);
-					if (opcValue) {
-						console.log("entrou aqui");
-						console.log(resp);
-
-						// console.log(userId);
-
+					if (!isNaN(opcValue) && opcValue !== null && opcValue !== undefined) {
 						// Certifique-se de que 'rotas' é um objeto válido
 						$.ajax(URL_BASE + "usuario/" + userData + "/rotas", {
 							method: "get",
 							contentType: "application/json",
 						}).done(function (res) {
 							const rotasObject = res || {};
-							console.log("Rotas object:", rotasObject);
 							const userObject = user || {};
-							console.log("User ID:", userObject);
-							// console.log("User Object:", userObject);
 							const userId = userObject.id;
-							console.log("User ID:", userId);
 							// // Verifica se a rota já foi adicionada aos favoritos pelo usuário
-							console.log("Entrou no bloco onde userId é válido");
 							const rotasArray =
 								rotasObject._embedded && rotasObject._embedded.rota
 									? rotasObject._embedded.rota
 									: [];
-							console.log("rotasArray: ", rotasArray);
 
 							// let rotaId = rota._links.rota.href.split("/").pop();
 
 							const rotaJaAdicionada = rotasArray.some(
 								(rot) => rot._links.rota.href.split("/").pop() == opcValue
 							);
-							console.log("entrou aqui 3");
-							console.log(rotaJaAdicionada);
 
 							if (rotaJaAdicionada === false) {
 								// Se a rota ainda não foi adicionada, faz a requisição para adicionar aos favoritos
@@ -198,7 +152,6 @@ function loginCallback(resp) {
 									}
 								)
 									.done(function () {
-										console.log("Elementos na Tela");
 										document.getElementById("g_id_logado").style.display =
 											"block";
 										updateList();
@@ -207,15 +160,11 @@ function loginCallback(resp) {
 										console.error("Erro ao adicionar favorito:", res);
 									});
 							} else {
-								console.log("Rota já adicionada aos favoritos pelo usuário.");
-								console.log("Elementos na Tela");
 								document.getElementById("g_id_logado").style.display = "block";
 								updateList();
 							}
 						});
 					} else {
-						console.log("Elseeeeee");
-						console.log("Elementos na Tela");
 						document.getElementById("g_id_logado").style.display = "block";
 						updateList();
 					}
@@ -224,28 +173,20 @@ function loginCallback(resp) {
 		})
 		.catch(function (error) {
 			// Se o usuário não existe, crie um novo registro
-			console.log("caiu aqui");
 			createUser(cred.email, cred.name, cred.sub)
 				.done(function (res) {
-					console.log("caiu aqui");
 					const urlParams = new URLSearchParams(window.location.search);
 					const opcValuetest = urlParams.get("opc");
 					const opcValue = parseInt(opcValuetest);
-					console.log(res);
 					const token = res.token;
-					console.log("Token:", token);
 					const decodedToken = jwt_decode(token);
-					console.log("Decoded Token:", decodedToken);
 					const userId = decodedToken.sub;
 					const ID = decodedToken.id;
-					console.log("ID:", ID);
-					console.log("Userid:", userId);
 					localStorage.setItem("authToken", res.token);
 
 					// Extrai o ID do usuário do Token
 					if (ID) {
 						userData = ID;
-						console.log("teste:" + userData);
 
 						if (opcValue) {
 							$.ajax(
@@ -257,7 +198,6 @@ function loginCallback(resp) {
 								}
 							)
 								.done(function () {
-									console.log("Elementos na Tela");
 									document.getElementById("g_id_logado").style.display =
 										"block";
 									updateList();
@@ -266,7 +206,6 @@ function loginCallback(resp) {
 									console.error("Erro ao adicionar favorito:", res);
 								});
 						} else {
-							console.log("Elementos na Tela");
 							document.getElementById("g_id_logado").style.display = "block";
 							updateList();
 						}
@@ -277,13 +216,11 @@ function loginCallback(resp) {
 						"Erro ao salvar a ID do usuário no banco de dados:",
 						res
 					);
-					console.log(res);
 				});
 		});
 }
 
 function setLoginStatus(cred) {
-	console.log("setLoginStatus");
 	// Esconde a tela de pré-login
 	document.getElementById("tela-pre-login").style.display = "none";
 	//esconde o botao de login do google
@@ -300,7 +237,6 @@ function setLoginStatus(cred) {
 //ao carregar a pagina, verifica se ja esta logado
 window.addEventListener("load", () => {
 	if (localStorage.getItem("gauth-token") != undefined) {
-		console.log("EventListenerLoad");
 		//se houver um token salvo
 		cred = jwtDecode(localStorage.getItem("gauth-token"));
 		//descriptografa e mostra o usuario logado
@@ -312,8 +248,26 @@ window.addEventListener("load", () => {
 				window.location.href = url;
 			} else {
 				userData = user.id;
-				console.log("teste:" + userData);
-				console.log("Elementos na Tela");
+				const urlParams = new URLSearchParams(window.location.search);
+				const opcValuetest = urlParams.get("opc");
+				const opcValue = parseInt(opcValuetest);
+
+				if (!isNaN(opcValue) && opcValue !== null && opcValue !== undefined) {
+					$.ajax(URL_BASE + "adicionar-favorito/" + userData + "/" + opcValue, {
+						method: "PUT",
+						data: JSON.stringify({}),
+						contentType: "application/json",
+					})
+						.done(function () {
+							document.getElementById("g_id_logado").style.display = "block";
+							updateList();
+						})
+						.fail(function (res) {
+							console.error("Erro ao adicionar favorito:", res);
+						});
+				} else {
+				}
+
 				document.getElementById("g_id_logado").style.display = "block";
 				updateList(); // Mova a chamada para updateList() aqui
 			}
@@ -325,44 +279,32 @@ function save() {
 	//envia para o backend
 	$.ajax(URL_BASE + "rota", {})
 		.done(function (res) {
-			console.log("eita: " + res);
 			//atualiza a lista após salvar
 			updateList();
 		})
-		.fail(function (res) {
-			// console.log(res);
-		});
+		.fail(function (res) {});
 }
 
 function updateList() {
 	// if (userData != null) {
 	// Agora você pode acessar os dados do usuário em userData
-	console.log("updateList");
-	console.log("Usuário ID: " + userData);
 	$.ajax(URL_BASE + "usuario/" + userData + "/rotas", {
 		method: "get",
 		contentType: "application/json",
 	})
 		.done(function (res) {
-			console.log(res);
-			console.log("Deu certo");
-
 			let select = $("#sel-linha-fav");
 			select.html("");
 
 			if (res._embedded && res._embedded.rota) {
 				res._embedded.rota.forEach(function (rota) {
 					let rotaId = rota._links.rota.href.split("/").pop();
-					console.log("Rota: ");
-					console.log("ID:", rotaId); // Adicione este log para garantir que o ID está correto
-					console.log("Nome:", rota.nomeRota);
 					let option = $("<option></option>")
 						.attr("value", rotaId)
 						.text(rota.nomeRota);
 					select.append(option);
 				});
 			} else {
-				console.log("Nenhuma rota encontrada para o usuário.");
 			}
 		})
 		.fail(function (error) {
@@ -378,7 +320,6 @@ $(function () {
 
 	$("#sel-linha-fav").change(function () {
 		var select = $(this).val();
-		console.log("Teste 1: " + select);
 		var rotaSelecionada = parseInt(select) + 1;
 	});
 
@@ -386,9 +327,8 @@ $(function () {
 		e.preventDefault(); // Impede o comportamento padrão do link
 
 		var selectedRouteId = $("#sel-linha-fav").val();
-		console.log("Teste 2: " + selectedRouteId);
 		var selectedDay = $("#sel-dia").val();
-		var url = "rotas.html?opc=" + selectedRouteId + "&test=" + selectedDay;
+		var url = "rotas.html?opc=" + selectedRouteId + "&sel=" + selectedDay;
 		window.location.href = url;
 	});
 });

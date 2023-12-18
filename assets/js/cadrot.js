@@ -9,11 +9,31 @@ $(function () {
 	updateList();
 });
 
+//ao carregar a pagina, verifica se ja esta logado
+window.addEventListener("load", () => {
+	if (localStorage.getItem("gauth-token") != undefined) {
+		//se houver um token salvo
+		cred = jwtDecode(localStorage.getItem("gauth-token"));
+		//descriptografa e mostra o usuario logado
+		setLoginStatus(cred);
+		checkUserExists(cred.sub).then(function (user) {
+			// Se o usuário existe, você pode executar qualquer ação adicional que desejar aqui
+			if (user.nivel === 1) {
+				var url = "../index.html";
+				window.location.href = url;
+			} else {
+			}
+		});
+	} else {
+		var url = "../index.html";
+		window.location.href = url;
+	}
+});
+
 function save() {
 	//captura os dados do form, já colocando como um JSON
 	dados = $("#nomeRota").serializeJSON();
 
-	// console.log(dados);
 	//caso esteja editando
 	if (URL_EDIT != null) {
 		//envia para a url do objeto
@@ -34,33 +54,25 @@ function save() {
 		},
 	})
 		.done(function (res) {
-			// console.log(res);
-
 			URL_EDIT = null;
 			//atualiza a lista após salvar
 			updateList();
 		})
-		.fail(function (res) {
-			// console.log(res);
-		});
+		.fail(function (res) {});
 
 	return false;
 }
 
 function updateList() {
-	console.log("teste1");
 	$.ajax(URL_BASE + "rota", {
 		method: "get",
 	})
 		.done(function (res) {
-			console.log("teste2");
-			console.log(res);
 			let table = $("#rotaContent");
 			table.html("");
 			$(res._embedded.rota).each(function (k, el) {
 				let rota = el;
 				informacao += `<p>Nome da Rota: ${rota.nomeRota}</p>`;
-				console.log(res);
 				tr = $(`<tr><td>${rota.nomeRota}</td>
             <td>
                 <a href="#" onclick="edit('${rota._links.self.href}')"><i class="bi bi-pencil-square"></i></a>
@@ -68,7 +80,6 @@ function updateList() {
 
             <td><a href="#" onclick="del('${rota._links.self.href}')"><i class="bx bx-trash"></i></a></td>
             </tr>`);
-				// console.log(rotaContent);
 				table.append(tr);
 			});
 		})
@@ -97,13 +108,14 @@ function del(url) {
 		//envia para o backend
 		$.ajax(url, {
 			method: "delete",
+			headers: {
+				Authorization: "Bearer " + authToken,
+			},
 		})
 			.done(function (res) {
 				//atualiza a lista após salvar
 				updateList();
 			})
-			.fail(function (res) {
-				// console.log(res);
-			});
+			.fail(function (res) {});
 	}
 }

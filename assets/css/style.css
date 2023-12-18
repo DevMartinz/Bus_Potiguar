@@ -1123,3 +1123,7 @@ section {
 	color: var(--white);
 	-webkit-text-fill-color: var(--white);
 }
+
+#trash {
+	color: rgb(199, 96, 96);
+}
